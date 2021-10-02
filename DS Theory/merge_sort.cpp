@@ -154,6 +154,7 @@ void Linkedlist::mergesort()
 		tmp=tmp->next;
 	}
 
+	//segmentation error after inserting node 1
 	Linkedlist newlist;
 	for(int i=0;i<count;i++)
 	{
