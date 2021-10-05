@@ -23,6 +23,13 @@ class linkedlist
 	node *tail;
 	node *temp;
 
+	linkedlist()
+	{
+		head = NULL;
+		tail = NULL;
+		temp=NULL;
+	}
+
 	void insert(int data)
 	{
 		node *newnode = new node(data);
@@ -38,13 +45,29 @@ class linkedlist
 		tail=tail->next;
 	}
 
-	
+	void printlist()
+	{
+		int count;
+		temp=head;
+		while(count!=5);
+		{
+			cout<<temp->data<<", ";
+			temp=temp->next;
+			count++;
+		}
+	}
 };
 
 int main(int argc, char const *argv[])
 {
 	linkedlist list;
 
+	list.insert(1);
+	list.insert(2);
+	list.insert(3);
+	list.insert(4);
+
+	list.printlist();
 
 	return 0;
 }
