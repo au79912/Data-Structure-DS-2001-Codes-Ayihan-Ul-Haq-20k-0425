@@ -172,17 +172,7 @@ void Linkedlist::mergesort()
 	}
 
 	newlist.printList();
-	// int datatemp;
-	// for(int i=0;i<3;i++)
-	// {
-	// 	datatemp=head->data;
-	// 	head=head->next;
-	// 	if(datatemp>head->data)
-	// 	{
-	// 		swap(datatemp,head->data);
-	// 	}
-	// }
-	
+
 }
 
 int main()
