@@ -191,10 +191,10 @@ int main()
 	
 	// list.insertNodeAny(7, 2);
 	
-	// list.printList();
+	list.printList();
 	
 	// list.deleteNode(2);
-	list.mergesort();
+	// list.mergesort();
 	
 	// list.printList();
 }
