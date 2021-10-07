@@ -5,45 +5,40 @@ class node {
 public:
 	int data;
 	node* next;
+	int key;
 
 	node()
 	{
 		data = 0;
 		next = NULL;
+		key = 0;
 	}
 
-	// Parameterised Constructor
-	node(int data)
+	node(int data, int key)
 	{
 		this->data = data;
 		this->next = NULL;
-		this->prev= NULL;
+		this->key=key;
 	}
 };
-class Linkedlist {
+
+
+class singlylinkedlist {
 	node* head;
-	node* tail;
-	node* tailp;
-	node* tmp;
-	node* Last;
 public:
-	// Default constructor
-	Linkedlist()
+	singlylinkedlist()
 	{
 		head = NULL;
-		tail = NULL;
-		Last = NULL;
 	}
 
-	void insertNode(int);
-	void insertNodeAny(int, int);
-
-	void printList();
-
-	void deleteNode(int);
+	singlylinkedlist(node *n)
+	{
+		head = n;
+	}
 };
 
 int main(int argc, char const *argv[])
 {
+	
 	return 0;
 }
