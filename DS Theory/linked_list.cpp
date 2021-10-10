@@ -1,99 +1,156 @@
-//LL assignment
 #include <iostream>
 
 using namespace std;
 
+template <class T>
 class node
 {
 	public:
-	int data;
-	node *next;
-	node *previous;
+		node *next;
+		node *prev;
+		T data;
+		node(T data)
+		{
+			this->data=data;
+		}
+		node()
+		{
+			prev=NULL;
+			next=NULL;
+		}
 };
 
-void printList(node *n)
+template <class T>
+class linkedlist
 {
-	cout<<"Linked list : ";
-	while (n != NULL) 
-	{
-		cout << n->data << " ";
-		n = n->next;
-	}
-}
+	public:
+		node<T> *head;
+		node<T> *tail;
+		node<T> *temp;
 
-void compare(node *n, node *x)
-{
-	if(n->data!=x->data)
-	{
-		cout<<"is not a Palindrome";
-		return;
-	}
-	n=n->next;
-	x=x->previous;
+		linkedlist()
+		{
+			head=NULL;
+			temp=NULL;
+			tail=NULL;
+		}
 
-	if(n->data!=x->data)
-	{
-		cout<<"is not a Palindrome";
-		return;
-	}
+		void insert(T data)
+		{
+			node<T> *newnode = new node<T>(data);
+			if(head==NULL)
+			{
+				head=newnode;
+				tail=head;
+				return;
+			}
 
-	else
-	{
-		cout<<"is a Palindrome";
-		return;
-	}
-}
+			tail->next=newnode;
+			newnode->prev=tail;
+			tail=tail->next;
+			tail->next=NULL;
+		}
 
+		void print()
+		{
+			temp=head;
+			while(temp!=NULL)
+			{
+				cout<<" "<<temp->data;
+				temp=temp->next;
+			}
+		}
+
+		linkedlist(const linkedlist &cpy)
+		{
+			//deep copy
+			head=NULL;
+			temp=cpy.head;
+
+			while (temp!=NULL)
+			{
+				this->insert(temp->data);
+				temp=temp->next;
+			}
+
+			//for shallow copy
+			// head=NULL;
+			// *this=cpy;
+		}
+
+		int lenth()
+		{
+			temp=this->head;
+			int count=0;
+			while(temp!=NULL)
+			{
+				count++;
+				temp=temp->next;
+			}
+
+			cout<<endl<<count;
+			return count;
+		}
+
+		void reverse()
+		{
+			node<T> *n=new node<T>();
+			n=head;
+			
+			// node *temp=new node();
+			temp=head;
+			
+			for(int i=0;i<this->lenth();i++)
+			{
+				while(n!=NULL)
+				{
+					T tmp;
+					tmp = temp->data;
+					temp->data = n->data;
+					n->data = tmp;
+				}
+				temp=temp->next;
+				n=temp;
+			}
+		}
+};
 
 
 int main(int argc, char const *argv[])
 {
-	node *head= NULL;
-	node *second= NULL;
-	node *third= NULL;
-	node *fourth= NULL;
-	node *fifth= NULL;
-
-	head= new node();
-	second= new node();
-	third= new node();
-	fourth= new node();
-	fifth= new node();
-
-	int arr[4];
-
-	int n=5;
+	linkedlist<int> list1;
 	
-	for(int i=0; i<n; i++)
+	int i;
+
+	cout<<"Enter the Number of elements : ";
+	cin>>i;
+	
+	int *array=new int[i];
+	
+	for(int j=0;j<i;j++)
 	{
-		cout<<"Enter the element in the linked list on position "<< i<<" : ";
-		cin>>arr[i];
+		fflush(stdin);
+		cout<<"Insert node "<< j+1<< " : ";
+		cin>>array[j];
+		list1.insert(array[j]);
 	}
 
+	// linkedlist<char> list2(list1);
 
-	head->data= arr[0];
-	head->next= second;
-	head->previous= NULL;
+	// list1.print();
+	// cout<<endl;
+	// list2.print();
 
-	second->data= arr[1];
-	second->next= third;
-	second->previous= head;
+	// list1.insert('q');
+	// list2.insert('p');
 
-	third->data= arr[2];
-	third->next= fourth;
-	third->previous= second;
+	// cout<<endl;
+	// list1.print();
+	// cout<<endl;
+	// list2.print();
 
-	fourth->data= arr[3];
-	fourth->next= fifth;
-	fourth->previous= third;
-
-	fifth->data= arr[4];
-	fifth->next= NULL;
-	fifth->previous=fourth;
-
-	printList(head);
-	compare(head, fifth);
-
-	
+	// list1.reverse();
+	list1.print();
+	list1.lenth();
 	return 0;
 }
