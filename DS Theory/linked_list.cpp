@@ -92,20 +92,17 @@ class linkedlist
 
 		void reverse()
 		{
-			node<T> *n=new node<T>();
-			n=head;
+			node<T> *n = new node<T>();
+			n=this->head;
 			
 			// node *temp=new node();
-			temp=head;
+			temp=this->head;
 			
 			for(int i=0;i<this->lenth();i++)
 			{
 				while(n!=NULL)
 				{
-					T tmp;
-					tmp = temp->data;
-					temp->data = n->data;
-					n->data = tmp;
+					swap(temp->data,n->data);
 				}
 				temp=temp->next;
 				n=temp;
@@ -161,6 +158,7 @@ int main(int argc, char const *argv[])
 
 	// list1.lenth();
 
-	// list1.reverse();	
+	// list1.reverse();
+	// list1.print();
 	return 0;
 }
