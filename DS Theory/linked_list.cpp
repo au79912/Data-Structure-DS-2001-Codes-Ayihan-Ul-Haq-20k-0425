@@ -87,8 +87,6 @@ class linkedlist
 				count++;
 				temp=temp->next;
 			}
-
-			cout<<endl<<count;
 			return count;
 		}
 
@@ -113,12 +111,25 @@ class linkedlist
 				n=temp;
 			}
 		}
+
+		bool operator==(linkedlist<T> &obj)
+		{
+			if(this->lenth()==obj.lenth())
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 };
 
 
 int main(int argc, char const *argv[])
 {
 	linkedlist<int> list1;
+	linkedlist<int> list2;
 	
 	int i;
 
@@ -134,23 +145,22 @@ int main(int argc, char const *argv[])
 		cin>>array[j];
 		list1.insert(array[j]);
 	}
-
-	// linkedlist<char> list2(list1);
+	
+	// linkedlist<int> list2(list1);
 
 	// list1.print();
 	// cout<<endl;
 	// list2.print();
 
 	// list1.insert('q');
-	// list2.insert('p');
+	// list2.insert(5);
 
-	// cout<<endl;
-	// list1.print();
-	// cout<<endl;
-	// list2.print();
-
-	// list1.reverse();
+	cout<<endl;
 	list1.print();
-	list1.lenth();
+
+
+	// list1.lenth();
+
+	// list1.reverse();	
 	return 0;
 }
