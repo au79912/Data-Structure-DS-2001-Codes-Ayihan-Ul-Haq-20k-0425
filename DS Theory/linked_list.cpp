@@ -120,6 +120,23 @@ class linkedlist
 				return false;
 			}
 		}
+
+		void deletenode(int data1)
+		{
+			tail = head;
+			while (tail != NULL)
+			{
+				if (tail->data == data1)
+				{
+					break;
+				}
+				temp = tail;
+				tail = tail->next;
+			}
+			tail= tail->next ;
+			temp->next = tail;
+			tail->prev = temp;
+		}
 };
 
 
