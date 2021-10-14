@@ -15,7 +15,7 @@ int main()
 	{
 		cin>>arr[i];
 	}
-
+	
 	int temp;
 
 	for (int i=0; i<m; i++)
