@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 
 	int max=-2147483647;
 	int maxend=0;
-
+	
 	for(j=0;j<i;j++)
 	{
 		maxend+=arr[j];
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 		if (max<maxend)
 		{
 			max=maxend;
-			start=temp;
+			start=temp; 
 			end=j;
 		}
 
