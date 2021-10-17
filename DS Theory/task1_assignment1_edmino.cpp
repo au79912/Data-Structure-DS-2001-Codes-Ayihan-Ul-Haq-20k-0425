@@ -4,8 +4,8 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	int m;
-	int n;
+	int m=0;
+	int n=0;
 
 	cin>>n;
 	cin>>m;
@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 		}
 	}
 
-	int k;
+	int k=0;
 	cin>>k;
 
 	int arr1[k][5];
