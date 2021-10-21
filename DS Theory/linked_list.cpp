@@ -38,6 +38,22 @@ class linkedlist
 		void insert(T data)
 		{
 			node<T> *newnode = new node<T>(data);
+			
+			//need to fix (insert circular)
+
+			// if(tail->next==head)
+			// {
+			// 	temp=head->next;
+			// 	while(temp!=head)
+			// 	{
+			// 		temp=temp->next;
+			// 	}
+			// 	tail->next=newnode;
+			// 	newnode->prev=tail;
+			// 	tail=tail->next;
+			// 	tail->next=head;
+			// } 
+
 			if(head==NULL)
 			{
 				head=newnode;
@@ -137,6 +153,11 @@ class linkedlist
 			temp->next = tail;
 			tail->prev = temp;
 		}
+
+		void makecircular()
+		{
+			tail->next=head;
+		}
 };
 
 
@@ -177,5 +198,9 @@ int main(int argc, char const *argv[])
 
 	// list1.reverse();
 	// list1.print();
-	return 0;
+
+	// cout<<endl;
+	// list1.makecircular();
+	// list1.insert(6);
+	// list1.print();
 }
