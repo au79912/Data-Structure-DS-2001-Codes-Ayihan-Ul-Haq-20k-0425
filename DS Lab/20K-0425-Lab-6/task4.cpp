@@ -197,5 +197,6 @@ int main()
 	M.insert(14);
 	M.insert(22);
 
+	L.connect(M);
 	L.display();
 }
