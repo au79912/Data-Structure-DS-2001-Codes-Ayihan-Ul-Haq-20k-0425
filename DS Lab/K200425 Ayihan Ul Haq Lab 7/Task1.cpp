@@ -27,7 +27,7 @@ class stack
 			else
 			{
 				a[++top]=x;
-				cout<<x<<"Pushed into stack";
+				cout<<x<<" Pushed into stack"<<endl;
 				return true;
 			}
 		}
@@ -37,6 +37,7 @@ class stack
 			if(top<0)
 			{
 				cout<<"stack Underflow";
+				return 0;
 			}
 
 			else
@@ -46,7 +47,7 @@ class stack
 			}
 		}
 
-		int peek()
+		int peak()
 		{
 			if(top<0)
 			{
@@ -64,6 +65,15 @@ class stack
 		{
 			return (top<0);
 		}
+
+		void print()
+		{
+			while(!this->isempty())
+			{
+				cout<<this->peak()<<" ";
+				this->pop();
+			}
+		}
 };
 
 int main(int argc, char const *argv[])
@@ -73,11 +83,13 @@ int main(int argc, char const *argv[])
 
 	for(int i=0;i<10;i++)
 	{
-		cout<<"enter the element in the "<<i+1<<" position of the stack";
+		cout<<"enter the element in the "<<i+1<<" position of the stack : ";
 		cin>>arr[i];
 		stack.push(arr[i]);
 	}
 
-	
+	stack.print();
+	stack.peak();
+
 	return 0;
 }
