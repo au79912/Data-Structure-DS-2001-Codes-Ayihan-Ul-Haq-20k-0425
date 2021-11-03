@@ -2,19 +2,19 @@
 
 using namespace std;
 
-void sort(int *arr, int n)
+//selection sort
+void selection_sort(int arr[], int n)
 {
-	int l;
-	int m;
-	int k;
-
-	for(int i=0;i<n;i++)
+	int i, j, min_idx;
+	for (i = 0; i < n-1; i++)
 	{
-		l=i;
-		for(int j=i+1;j<n;j++)
+		min_idx = i;
+		for (j = i+1; j < n; j++)
 		{
-			
+			if (arr[j] < arr[min_idx])
+				min_idx = j;
 		}
+		swap(arr[min_idx], arr[i]);
 	}
 }
 
@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
 		cin>>arr[i];
 	}
 
-	sort(arr,size);
+	selection_sort(arr,size);
 
 	return 0;
 }
