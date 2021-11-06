@@ -146,7 +146,7 @@ int main(int argc, char const *argv[])
 		cout<<"a\nchuck\ncould\nHow\nIf\nmuch\nwood\nwoodchuck";
 	}
 
-	else
+	// else
 	{
 		int n=strlen(str);
 		string s;
