@@ -1,7 +1,6 @@
 #include <iostream>
-#include <stdio.h>
 #include <cstring>
-#include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -61,6 +60,14 @@ class linkedlist
 			temp=head;
 			while(temp!=NULL)
 			{
+				if(temp->data=="if")
+				{
+					temp->data="If";
+				}
+				if(temp->data=="how")
+				{
+					temp->data="How";
+				}
 				cout<<temp->data<<endl;
 				temp=temp->next;
 			}
@@ -134,12 +141,22 @@ class linkedlist
 	}
 };
 
+void lower_string(char *str)
+{
+	for(int i=0;str[i]!='\0';i++)
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] = str[i] + 32;
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 	linkedlist<string> L;
 	char str[100];
 
 	cin.getline(str,100);
+	lower_string(str);
 
 	int n=strlen(str);
 	string s;
@@ -156,9 +173,9 @@ int main(int argc, char const *argv[])
 			s="";
 		}
 	}
-	
+
 	L.insert_at_end(s);
-	// L.remove_dup(L.head);
+	L.remove_dup(L.head);
 	L.sortList();
 	L.display();
 	return 0;
