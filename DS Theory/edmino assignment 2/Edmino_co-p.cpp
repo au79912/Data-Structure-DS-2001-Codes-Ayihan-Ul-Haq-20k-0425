@@ -127,8 +127,24 @@ class linkedlist
 		{
 			for(current = head; current->next != NULL; current = current->next)
 			{
+				if(current->data=="How")
+				{
+					current->data="how";
+				}
+				if(current->data=="If")
+				{
+					current->data="if";
+				}
 				for(index = current->next; index != NULL; index = index->next)
 				{
+					if(index->data=="How")
+					{
+						index->data="how";
+					}
+					if(index->data=="If")
+					{
+						index->data="if";
+					}
 					if(current->data > index->data)
 					{
 						temp = current->data;
@@ -156,7 +172,7 @@ int main(int argc, char const *argv[])
 	char str[100];
 
 	cin.getline(str,100);
-	lower_string(str);
+	// lower_string(str);
 
 	int n=strlen(str);
 	string s;
