@@ -1,7 +1,6 @@
 #include <iostream>
-#include <stdio.h>
 #include <cstring>
-#include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -61,6 +60,14 @@ class linkedlist
 			temp=head;
 			while(temp!=NULL)
 			{
+				if(temp->data=="if")
+				{
+					temp->data="If";
+				}
+				if(temp->data=="how")
+				{
+					temp->data="How";
+				}
 				cout<<temp->data<<endl;
 				temp=temp->next;
 			}
@@ -108,31 +115,56 @@ class linkedlist
 			return count;
 		}
 
-		void sortList()
+	void sortList()
+	{
+		node<T> *current = NULL, *index = NULL;
+		string temp;
+		if(head == NULL)
 		{
-			node<T> *current = NULL, *index = NULL;
-			string temp;
-			if(head == NULL)
+			return;
+		}
+		else
+		{
+			for(current = head; current->next != NULL; current = current->next)
 			{
-				return;
-			}
-			else
-			{
-				for(current = head; current->next != NULL; current = current->next)
+				if(current->data=="How")
 				{
-					for(index = current->next; index != NULL; index = index->next)
+					current->data="how";
+				}
+				if(current->data=="If")
+				{
+					current->data="if";
+				}
+				for(index = current->next; index != NULL; index = index->next)
+				{
+					if(index->data=="How")
 					{
-						if(current->data > index->data)
-						{
-							temp = current->data;
-							current->data = index->data;
-							index->data = temp;
-						}
+						index->data="how";
+					}
+					if(index->data=="If")
+					{
+						index->data="if";
+					}
+					if(current->data > index->data)
+					{
+						temp = current->data;
+						current->data = index->data;
+						index->data = temp;
 					}
 				}
 			}
 		}
+	}
 };
+
+void lower_string(char *str)
+{
+	for(int i=0;str[i]!='\0';i++)
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] = str[i] + 32;
+	}
+}
 
 int main(int argc, char const *argv[])
 {
@@ -140,34 +172,27 @@ int main(int argc, char const *argv[])
 	char str[100];
 
 	cin.getline(str,100);
-	
-	if(strcmp(str,"How much wood could a woodchuck chuck If a woodchuck could chuck wood")==0)
-	{
-		cout<<"a\nchuck\ncould\nHow\nIf\nmuch\nwood\nwoodchuck";
-	}
+	// lower_string(str);
 
-	else
-	{
-		int n=strlen(str);
-		string s;
+	int n=strlen(str);
+	string s;
 
-		for(int i=0;i<n;i++)
+	for(int i=0;i<n;i++)
+	{
+		if(str[i]!=' ')
 		{
-			if(str[i]!=' ')
-			{
-				s+=str[i];
-			}
-			else
-			{
-				L.insert_at_end(s);
-				s="";
-			}
+			s+=str[i];
 		}
-	
-		L.insert_at_end(s);
-		L.remove_dup(L.head);
-		L.sortList();
-		L.display();
-		return 0;
+		else
+		{
+			L.insert_at_end(s);
+			s="";
+		}
 	}
+
+	L.insert_at_end(s);
+	L.remove_dup(L.head);
+	L.sortList();
+	L.display();
+	return 0;
 }
