@@ -8,14 +8,17 @@ class node
 	public:
 		node *next;
 		node *prev;
-		node *ID;
+		string ID;
 		T data;
+		int time;
+		int quota;
+
 		node()
 		{
 			next = NULL;
 			prev = NULL;
 		}
-		node(T ID)
+		node(string ID)
 		{
 			next = NULL;
 			prev = NULL;
@@ -43,7 +46,29 @@ class linkedlist
 			tail=NULL;
 			temp=NULL;
 		}
-		
+
+		void insert(string ID, int time, int quota)
+		{
+			node<T> *newnode = new node<T>(ID);
+			newnode->time = time;
+			newnode->quota = quota;
+			if(head==NULL)
+			{
+				head = newnode;
+				tail = newnode;
+			}
+			else
+			{
+				tail->next = newnode;
+				newnode->prev = tail;
+				tail = newnode;
+			}
+		}
+
+		void checker()
+		{
+			if( )
+		}
 };
 
 int main(int argc, char const *argv[])
