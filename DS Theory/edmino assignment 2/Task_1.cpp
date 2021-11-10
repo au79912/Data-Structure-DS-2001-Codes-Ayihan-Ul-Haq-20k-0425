@@ -1,70 +1,200 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
-template <class T>
 class node
 {
 	public:
 		node *next;
-		node *prev;
-		T data;
-		
+		int coffec; //coefficent
+		char var; //variable
+		int exp; //exponent
+
+		node()
+		{
+			next = NULL;
+			coffec = 0;
+			var = '\0';
+			exp = 0;
+		}
+
+		node(int coffec, char var, int exp)
+		{
+			next = NULL;
+			this->coffec = coffec;
+			this->var = var;
+			this->exp = exp;
+		}
 };
 
-template <class T>
 class linkedlist
 {
 	public:
-		node<T> *head;
-		node<T> *tail;
-		node<T> *temp;
+		node *head;
+		node *tail;
+		node *temp;
 
 		linkedlist()
 		{
-			head=NULL;
-			tail=NULL;
+			head = tail =NULL;
 			temp=NULL;
 		}
-		
-		void insert_at_end(T data)
+
+		void inserting_polynomial(int coffec, char var, int exp)
 		{
-			node<T> *newnode=new node<T>;
-			newnode->data=data;
-			newnode->next=NULL;
-			newnode->prev=NULL;
-			
-			if(head==NULL)
+			node *newnode = new node(coffec, var, exp);
+			if(head == NULL)
 			{
-				head=newnode;
-				tail=newnode;
+				head = newnode;
+				tail = newnode;
 			}
+
 			else
 			{
-				tail->next=newnode;
-				newnode->prev=tail;
-				tail=newnode;
+				tail->next = newnode;
+				tail = newnode;
 			}
 		}
 
-		void delete_at_end()
+		void add_polynomial(linkedlist *list1, linkedlist *list2)
 		{
-			if(head==NULL)
+			node *temp1 = list1->head;
+			node *temp2 = list2->head;
+			while(temp1 != NULL && temp2 != NULL)
 			{
-				cout<<"List is empty"<<endl;
+				if(temp2->coffec<0 || temp1->coffec<0)
+				{
+					if(temp1->coffec<0)
+					{
+						inserting_polynomial(temp1->coffec, temp1->var, temp1->exp);
+						temp1 = temp1->next;
+					}
+					if(temp2->coffec<0)
+					{
+						inserting_polynomial(temp2->coffec, temp2->var, temp2->exp);
+						temp2 = temp2->next;
+					}
+				}
+
+				else if(temp1->exp == temp2->exp)
+				{
+					inserting_polynomial(temp1->coffec + temp2->coffec, temp1->var, temp1->exp);
+					temp1 = temp1->next;
+					temp2 = temp2->next;
+				}
+
+				else if(temp1->exp > temp2->exp)
+				{
+					inserting_polynomial(temp1->coffec, temp1->var, temp1->exp);
+					temp1 = temp1->next;
+				}
+				
+				else
+				{
+					inserting_polynomial(temp2->coffec, temp2->var, temp2->exp);
+					temp2 = temp2->next;
+				}
 			}
-			else
+
+			while(temp1 != NULL)
 			{
-				temp=tail;
-				tail=tail->prev;
-				tail->next=NULL;
-				delete temp;
+				inserting_polynomial(temp1->coffec, temp1->var, temp1->exp);
+				temp1 = temp1->next;
+			}
+			
+			while(temp2 != NULL)
+			{
+				inserting_polynomial(temp2->coffec, temp2->var, temp2->exp);
+				temp2 = temp2->next;
+			}
+		}
+
+		void sort_polynomial()
+		{
+			node *temp1 = head;
+			node *temp2 = head;
+			
+			while(temp1 != NULL)
+			{
+				temp2 = temp1;
+			
+				while(temp2->next != NULL)
+				{
+					if(temp1->exp > temp2->next->exp)
+					{
+						int coffec = temp1->coffec;
+						char var = temp1->var;
+						int exp = temp1->exp;
+						temp1->coffec = temp2->next->coffec;
+						temp1->var = temp2->next->var;
+						temp1->exp = temp2->next->exp;
+						temp2->next->coffec = coffec;
+						temp2->next->var = var;
+						temp2->next->exp = exp;
+					}
+					temp2 = temp2->next;
+				}
+				temp1 = temp1->next;
+			}
+		}
+
+		void display_polynomial()
+		{
+			node *temp = head;
+			int counter=0;
+
+			while(temp != NULL)
+			{
+				counter++;
+				temp = temp->next;
+			}
+			cout<<counter<<endl;
+			temp = head;
+
+			while(temp != NULL)
+			{
+				cout<<temp->coffec<<" "<<temp->var<<" "<<temp->exp<<endl;
+				temp = temp->next;
 			}
 		}
 };
 
-int main(int argc, char const *argv[])
+int main()
 {
+	linkedlist *list1 = new linkedlist();
+	linkedlist *list2 = new linkedlist();
+	linkedlist *result = new linkedlist();
+	int coffec, exp;
+	char var;
+
+	int n1=0, n2=0; //number of equations in first and second polynomial
+	int k1=0,k2=0; //checker for polynomial 1 and 2
+
+
+	cin>>n1;
+	do
+	{
+		cin>>coffec>>var>>exp;
+		list1->inserting_polynomial(coffec, var, exp);
+		k1++;
+
+	} while(k1!=n1);
+
+	cin>>n2;
+	do
+	{
+		cin>>coffec>>var>>exp;
+		list2->inserting_polynomial(coffec, var, exp);
+		k2++;
+	}while(k2!=n2);
+
 	
+	result->add_polynomial(list1, list2);
+	result->sort_polynomial();
+	result->display_polynomial();
+	cout<<endl;
+
+
 	return 0;
 }
