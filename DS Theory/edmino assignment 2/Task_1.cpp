@@ -202,7 +202,6 @@ int main()
 		list2->inserting_polynomial(coffec, var, exp);
 		k2++;
 	}while(k2!=n2);
-
 	
 	result->add_polynomial(list1, list2);
 	result->sort_polynomial();
