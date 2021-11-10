@@ -7,9 +7,9 @@ class node
 {
 	public:
 		node *next;
-		int coffec; //coefficent
-		char var; //variable
-		int exp; //exponent
+		int coffec; //coefficent (2)x^2
+		char var; //variable 2(x)^2
+		int exp; //exponent 2x^(2)
 
 		node()
 		{
@@ -65,15 +65,16 @@ class linkedlist
 			{
 				if(temp2->coffec<0 || temp1->coffec<0)
 				{
-					if(temp1->coffec<0)
-					{
-						inserting_polynomial(temp1->coffec, temp1->var, temp1->exp);
-						temp1 = temp1->next;
-					}
 					if(temp2->coffec<0)
 					{
 						inserting_polynomial(temp2->coffec, temp2->var, temp2->exp);
 						temp2 = temp2->next;
+					}
+
+					if(temp1->coffec<0)
+					{
+						inserting_polynomial(temp1->coffec, temp1->var, temp1->exp);
+						temp1 = temp1->next;
 					}
 				}
 
@@ -122,6 +123,19 @@ class linkedlist
 				while(temp2->next != NULL)
 				{
 					if(temp1->exp > temp2->next->exp)
+					{
+						int coffec = temp1->coffec;
+						char var = temp1->var;
+						int exp = temp1->exp;
+						temp1->coffec = temp2->next->coffec;
+						temp1->var = temp2->next->var;
+						temp1->exp = temp2->next->exp;
+						temp2->next->coffec = coffec;
+						temp2->next->var = var;
+						temp2->next->exp = exp;
+					}
+
+					if(temp1->coffec==temp2->next->coffec && temp1->var>temp2->next->var)
 					{
 						int coffec = temp1->coffec;
 						char var = temp1->var;
