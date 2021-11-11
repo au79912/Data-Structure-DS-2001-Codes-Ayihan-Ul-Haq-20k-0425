@@ -153,6 +153,7 @@ class linkedlist
 			}
 		}
 
+		
 		void display_polynomial()
 		{
 			node *temp = head;
@@ -168,8 +169,29 @@ class linkedlist
 
 			while(temp != NULL)
 			{
-				cout<<temp->coffec<<" "<<temp->var<<" "<<temp->exp<<endl;
-				temp = temp->next;
+				while(temp != NULL)
+				{
+					if(temp->var == 'X')
+					{
+						cout<<temp->coffec<<" "<<temp->var<<" "<<temp->exp<<endl;
+						temp = temp->next;
+					}
+					else
+						temp=temp->next;
+				}
+
+				temp = head;
+
+				while(temp != NULL)
+				{
+					if(temp->var == 'Y')
+					{
+						cout<<temp->coffec<<" "<<temp->var<<" "<<temp->exp<<endl;
+						temp = temp->next;
+					}
+					else
+						temp=temp->next;
+				}
 			}
 		}
 };
@@ -202,7 +224,7 @@ int main()
 		list2->inserting_polynomial(coffec, var, exp);
 		k2++;
 	}while(k2!=n2);
-	
+ 	
 	result->add_polynomial(list1, list2);
 	result->sort_polynomial();
 	result->display_polynomial();
