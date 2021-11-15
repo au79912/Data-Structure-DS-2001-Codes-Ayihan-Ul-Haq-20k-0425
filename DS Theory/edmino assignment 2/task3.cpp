@@ -96,7 +96,6 @@ int main(int argc, char const *argv[])
 	int m;
 	
 	cin>>m;
-
 	for(int i=0;i<m; i++)
 	{
 		string id;
