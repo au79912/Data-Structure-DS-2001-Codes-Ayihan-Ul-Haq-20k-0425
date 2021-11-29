@@ -90,6 +90,11 @@ class linkedList
 		}
 };
 
+void tester(int something)
+{
+	cout<<"hello world";
+}
+
 int main(int argc, char const *argv[])
 {
 	linkedList l;
