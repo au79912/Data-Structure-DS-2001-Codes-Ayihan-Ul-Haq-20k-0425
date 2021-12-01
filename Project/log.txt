@@ -6,3 +6,5 @@ Miner 2		10741996		no hablo espeneol
 Miner 2		10255615		test run 3
 Miner 1		0		hello world
 Miner 1		0		ayihan
+Miner 1		0		ayihan ul haq
+Miner 3		9012996		test 5

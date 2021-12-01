@@ -6,3 +6,6 @@ miner 1 found the answer of the number : 29059 in 13113078 micro seconds
 miner 1 found the answer of the fibonci : 6765 in 0 micro seconds
 miner 1 found the answer of the fibonci : 1134903170 in 0 micro seconds
 miner 1 found the answer of the fibonci : 102334155 in 0 micro seconds
+miner 1 found the answer of the fibonci : 2584 in 0 micro seconds
+miner 1 found the answer of the fibonci : 1134903170 in 0 micro seconds
+miner 1 found the answer of the number : 7919 in 14108149 micro seconds
