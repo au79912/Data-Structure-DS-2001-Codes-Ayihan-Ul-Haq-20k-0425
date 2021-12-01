@@ -1,0 +1,1 @@
+miner 3 found the answer of the number : 21878 in 11292498 micro seconds
