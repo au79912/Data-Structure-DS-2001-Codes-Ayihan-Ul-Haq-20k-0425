@@ -4,13 +4,14 @@
 #include <string>
 #include <fstream>
 
-int ans1 = 0;
+long int ans1 = 0;
 int ans2 = 0;
 std::string ans3 = "\0";
 
 int time1 =0;
 int time2 =0;
 int time3 =0;
+int puzzle_3_fib(int n);
 
 using namespace std;
 
@@ -19,25 +20,25 @@ void puzzles(int n)
 {
 	auto start = chrono::high_resolution_clock::now();
 
-	if (n == 0)
+	if (n == 0)//fib
 	{
 		//brute force fibonacci sequence
-		int num;
+		long int num=0;
 		do
 		{
-			int past = 0, prev = 1, curr = 0;
-			for (int i = 3;; i++)
+			long fib_0 = 0; 
+			long fib_1 = 1;
+			for(int i = 1;; i++)
 			{
-				// cout << past << " ";
-				curr = past + prev;
-				past = prev;
-				prev = curr;
-				num=curr;
-				if(num == ans1)
+				int next_fib = fib_0 + fib_1;
+				fib_0 = fib_1;
+				fib_1 = next_fib;
+				if(fib_1==ans1)
 				{
+					num=fib_1;
 					break;
 				}
-			}
+			} 
 		} while (num != ans1);
 		auto stop = chrono::high_resolution_clock::now();
 		auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -48,7 +49,7 @@ void puzzles(int n)
 		miner1<< "miner 1 found the answer of the fibonci : " << num << " in " <<time1<< " micro seconds"<<endl;
 	}
 
-	if (n == 1)
+	if (n == 1)//sum of numbers
 	{
 		//brute force a number between 1 and int max
 		int ans;
@@ -71,7 +72,7 @@ void puzzles(int n)
 		miner1<< "miner 1 found the answer of the number : " << ans << " in " <<time1<< " micro seconds"<<endl;
 	}
 
-	if(n == 2)
+	if(n == 2)//substring
 	{
 		//brute forcing a string of alphabets
 		string str = "";
@@ -97,25 +98,13 @@ void puzzles2(int n)
 {
 	auto start = chrono::high_resolution_clock::now();
 
-	if (n == 0)
+	if (n == 0)//fib
 	{
 		//brute force fibonacci sequence
-		int num;
+		long int num;
 		do
 		{
-			int past = 0, prev = 1, curr = 0;
-			for (int i = 3;; i++)
-			{
-				// cout << past << " ";
-				curr = past + prev;
-				past = prev;
-				prev = curr;
-				num=curr;
-				if(num == ans1)
-				{
-					break;
-				}
-			}
+			num++;
 		} while (num != ans1);
 		auto stop = chrono::high_resolution_clock::now();
 		auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -126,7 +115,7 @@ void puzzles2(int n)
 		miner2<< "miner 2 found the answer of the fibonci : " << num << " in " <<time2<< " micro seconds"<<endl;
 	}
 
-	if (n == 1)
+	if (n == 1)//sum of number
 	{
 		//brute force a number between 1 and int max
 		int ans;
@@ -149,7 +138,7 @@ void puzzles2(int n)
 		miner2<< "miner 2 found the answer of the number : " << ans << " in " <<time2<< " micro seconds"<<endl;
 	}
 
-	if(n == 2)
+	if(n == 2)//substring
 	{
 		//brute forcing a string of alphabets
 		string str = "";
@@ -175,21 +164,16 @@ void puzzles3(int n)
 {
 	auto start = chrono::high_resolution_clock::now();
 
-	if (n == 0)
+	if (n == 0)//fib
 	{
+		long int num;
 		//brute force fibonacci sequence
-		int num;
 		do
 		{
-			int past = 0, prev = 1, curr = 0;
-			for (int i = 3;; i++)
+			for(int i = 0;;i++)
 			{
-				// cout << past << " ";
-				curr = past + prev;
-				past = prev;
-				prev = curr;
-				num=curr;
-				if(num == ans1)
+				num=puzzle_3_fib(i);
+				if(num==ans1)
 				{
 					break;
 				}
@@ -204,7 +188,7 @@ void puzzles3(int n)
 		miner3<< "miner 3 found the answer of the fibonci : " << num << " in " <<time3<< " micro seconds"<<endl;
 	}
 
-	if (n == 1)
+	if (n == 1)//sum of numbers 
 	{
 		//brute force a number between 1 and int max
 		int ans;
@@ -227,7 +211,7 @@ void puzzles3(int n)
 		miner3<< "miner 3 found the answer of the number : " << ans << " in " <<time3<< " micro seconds"<<endl;
 	}
 
-	if(n == 2)
+	if(n == 2)//substring 
 	{
 		//brute forcing a string of alphabets
 		string str = "";
@@ -241,11 +225,18 @@ void puzzles3(int n)
 	}
 }
 
-
+int puzzle_3_fib(int n)
+{
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+	return puzzle_3_fib(n - 1) + puzzle_3_fib(n - 2);
+}
 
 void puzzle_answer_1(int n)
 {
-	int past = 0, prev = 1, curr = 0;
+	long int past = 0, prev = 1, curr = 0;
 	for (int i = 3; i < n+2; i++)
 	{
 		curr = past + prev;
@@ -282,18 +273,22 @@ void puzzle_answer_3(string n)
 
 
 
-int main(int argc, char const *argv[])
+int main(int argc, char const *argv[])	
 {
 	string message;
 	cout << "Enter the message: ";
 	getline(cin, message);
 
-	int min=2, max=100000;
+	int min=1, max=100000;
 	srand(time(NULL));
 	int j = rand() % max-min +min;
+
+	int min2 = 40 , max2 = 85;
+	srand(time(NULL));
+	int k = rand() % max2-min2 +min2;
 	
 	//solver thread
-	thread solver1(puzzle_answer_1,42);
+	thread solver1(puzzle_answer_1, k);
 	thread solver2(puzzle_answer_2,j);
 	thread solver3(puzzle_answer_3,"abcdefghijklmnopqrstuvwxyz");
 	
@@ -335,7 +330,7 @@ int main(int argc, char const *argv[])
 	}
 	else
 	{
-		cout<<"\nIssa tie";
+		cout<<"\nIssa tie\n";
 	}
 	return 0;
 }

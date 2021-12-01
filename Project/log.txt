@@ -1,2 +1,8 @@
 Miner 2		11954142		hello world
 Miner 3		11292498		hello ayihan
+Miner 2		10331360		test case 1
+Miner 2		10231054		ayo wanda
+Miner 2		10741996		no hablo espeneol
+Miner 2		10255615		test run 3
+Miner 1		0		hello world
+Miner 1		0		ayihan

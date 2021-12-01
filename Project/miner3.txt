@@ -1,1 +1,8 @@
 miner 3 found the answer of the number : 21878 in 11292498 micro seconds
+miner 3 found the answer of the number : 23243 in 10426302 micro seconds
+miner 3 found the answer of the number : 23394 in 10469084 micro seconds
+miner 3 found the answer of the number : 23707 in 11504689 micro seconds
+miner 3 found the answer of the number : 29059 in 10460535 micro seconds
+miner 3 found the answer of the fibonci : 6765 in 0 micro seconds
+miner 3 found the answer of the fibonci : 1134903170 in 23806689 micro seconds
+miner 3 found the answer of the fibonci : 102334155 in 3120995 micro seconds
