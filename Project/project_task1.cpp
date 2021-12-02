@@ -273,11 +273,13 @@ void puzzle_answer_3(string n)
 
 
 
-int main(int argc, char const *argv[])	
+int main(int argc, char const *argv[])
 {
-	string message;
-	cout << "Enter the message: ";
-	getline(cin, message);
+	string message="hello";
+	int ID;
+
+	srand(time(NULL));
+	ID=rand()%1000;
 
 	int min=1, max=100000;
 	srand(time(NULL));
@@ -285,7 +287,7 @@ int main(int argc, char const *argv[])
 
 	int min2 = 40 , max2 = 85;
 	srand(time(NULL));
-	int k = rand() % max2-min2 +min2;
+	int k = rand() % max2-min2 +min2; //random number generated for fibonoci sequence
 	
 	//solver thread
 	thread solver1(puzzle_answer_1, 45);
@@ -308,7 +310,7 @@ int main(int argc, char const *argv[])
 		//append the answer to the file
 		ofstream miner1;
 		miner1.open("log.txt",std::ios_base::app);
-		miner1<<"Miner 1\t\t"<<time1<<"\t\t"<<message<<endl;
+		miner1<<"Miner 1\t\t"<<" ID : "<<ID<<"  time : "<<time1<<"\t\t"<<message<<endl;
 		miner1.close();
 		cout<<"\nminer 1 wins"<<endl;
 	}
@@ -316,7 +318,7 @@ int main(int argc, char const *argv[])
 	{
 		ofstream miner2;
 		miner2.open("log.txt", std::ios_base::app);
-		miner2<<"Miner 2\t\t"<<time2<<"\t\t"<<message<<endl;
+		miner2<<"Miner 2\t\t"<<" ID : "<<ID<<"  time : "<<time2<<"\t\t"<<message<<endl;
 		miner2.close();
 		cout<<"\nminer 2 wins"<<endl;
 	}
@@ -324,13 +326,13 @@ int main(int argc, char const *argv[])
 	{
 		ofstream miner3;
 		miner3.open("log.txt",std::ios_base::app);
-		miner3<<"Miner 3\t\t"<<time3<<"\t\t"<<message<<endl;
+		miner3<<"Miner 3\t\t"<<"  ID : "<<ID<<"  time : "<<time3<<"\t\t"<<message<<endl;
 		miner3.close();
 		cout<<"\n miner 3 wins"<<endl;
 	}
 	else
 	{
-		cout<<"\nIssa tie\n";
+		cout<<"\nIts a tie\n";
 	}
 	return 0;
 }

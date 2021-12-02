@@ -1,11 +1,7 @@
-miner 1 found the answer of the number : 21878 in 12782872 micro seconds
-miner 1 found the answer of the number : 23243 in 10962896 micro seconds
-miner 1 found the answer of the number : 23394 in 12230166 micro seconds
-miner 1 found the answer of the number : 23707 in 12166759 micro seconds
-miner 1 found the answer of the number : 29059 in 13113078 micro seconds
-miner 1 found the answer of the fibonci : 6765 in 0 micro seconds
 miner 1 found the answer of the fibonci : 1134903170 in 0 micro seconds
-miner 1 found the answer of the fibonci : 102334155 in 0 micro seconds
-miner 1 found the answer of the fibonci : 2584 in 0 micro seconds
 miner 1 found the answer of the fibonci : 1134903170 in 0 micro seconds
-miner 1 found the answer of the number : 7919 in 14108149 micro seconds
+miner 1 found the answer of the number : 4406 in 13773728 micro seconds
+miner 1 found the answer of the number : 4579 in 12997372 micro seconds
+miner 1 found the answer of the number : 4726 in 13243479 micro seconds
+miner 1 found the answer of the number : 4824 in 12751578 micro seconds
+miner 1 found the answer of the number : 4915 in 13740242 micro seconds
