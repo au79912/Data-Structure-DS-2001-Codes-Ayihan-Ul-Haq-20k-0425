@@ -285,7 +285,7 @@ int main(int argc, char const *argv[])
 	srand(time(NULL));
 	int j = rand() % max-min +min;
 
-	int min2 = 40 , max2 = 85;
+	int min2 = 45 , max2 = 85;
 	srand(time(NULL));
 	int k = rand() % max2-min2 +min2; //random number generated for fibonoci sequence
 	
@@ -295,14 +295,14 @@ int main(int argc, char const *argv[])
 	thread solver3(puzzle_answer_3,"abcdefghijklmnopqrstuvwxyz");
 	
 	srand(time(NULL));
-	int n = rand() % 3;
+	int n = rand() % 2;
 	
 	//miners
-	thread miner1(puzzles,1);
+	thread miner1(puzzles,n);
 	miner1.join();
-	thread miner2(puzzles2,1);
+	thread miner2(puzzles2,n);
 	miner2.join();
-	thread miner3(puzzles3,1);
+	thread miner3(puzzles3,n);
 	miner3.join();
 
 	if(time1<time2 && time1<time3)
@@ -310,7 +310,7 @@ int main(int argc, char const *argv[])
 		//append the answer to the file
 		ofstream miner1;
 		miner1.open("log.txt",std::ios_base::app);
-		miner1<<"Miner 1\t\t"<<" ID : "<<ID<<"  time : "<<time1<<"\t\t"<<message<<endl;
+		miner1<<"Miner 1\t\t"<<" ID : "<<ID<<"  time : "<<time1<<"ms\t\t"<<message<<endl;
 		miner1.close();
 		cout<<"\nminer 1 wins"<<endl;
 	}
@@ -318,7 +318,7 @@ int main(int argc, char const *argv[])
 	{
 		ofstream miner2;
 		miner2.open("log.txt", std::ios_base::app);
-		miner2<<"Miner 2\t\t"<<" ID : "<<ID<<"  time : "<<time2<<"\t\t"<<message<<endl;
+		miner2<<"Miner 2\t\t"<<" ID : "<<ID<<"  time : "<<time2<<"ms\t\t"<<message<<endl;
 		miner2.close();
 		cout<<"\nminer 2 wins"<<endl;
 	}
@@ -326,7 +326,7 @@ int main(int argc, char const *argv[])
 	{
 		ofstream miner3;
 		miner3.open("log.txt",std::ios_base::app);
-		miner3<<"Miner 3\t\t"<<"  ID : "<<ID<<"  time : "<<time3<<"\t\t"<<message<<endl;
+		miner3<<"Miner 3\t\t"<<"  ID : "<<ID<<"  time : "<<time3<<"ms\t\t"<<message<<endl;
 		miner3.close();
 		cout<<"\n miner 3 wins"<<endl;
 	}
