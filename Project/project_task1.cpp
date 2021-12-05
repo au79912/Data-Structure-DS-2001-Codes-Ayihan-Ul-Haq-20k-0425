@@ -292,7 +292,7 @@ int main(int argc, char const *argv[])
 	//solver thread
 	thread solver1(puzzle_answer_1, k);
 	thread solver2(puzzle_answer_2,j);
-	thread solver3(puzzle_answer_3,"abcdefghijklmnopqrstuvwxyz");
+	thread solver3(puzzle_answer_3,"abcdefghijklmnopqrstuvwxy");
 	
 	srand(time(NULL));
 	int n = rand() % 2;
