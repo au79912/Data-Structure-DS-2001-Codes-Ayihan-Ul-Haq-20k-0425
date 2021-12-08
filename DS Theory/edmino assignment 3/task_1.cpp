@@ -2,51 +2,61 @@
 
 using namespace std;
 
-void puzzle(int arr[3][3])
+//recursive approach for winner in tic tac toe
+int winner(char board[3][3])
 {
-	//result of tic tac toe
-	int result = 0;
-	//check for horizontal win
+	//checking rows
 	for (int i = 0; i < 3; i++)
 	{
-		if (arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2])
+		if (board[i][0] == board[i][1] && board[i][1] == board[i][2])
 		{
-			result = arr[i][0];
+			if (board[i][0] == 'X')
+				return 1;
+			else if (board[i][0] == 'O')
+				return 2;
 		}
 	}
-	//check for vertical win
+
+	//checking columns
 	for (int i = 0; i < 3; i++)
 	{
-		if (arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i])
+		if (board[0][i] == board[1][i] && board[1][i] == board[2][i])
 		{
-			result = arr[0][i];
+			if (board[0][i] == 'X')
+				return 1;
+			else if (board[0][i] == 'O')
+				return 2;
 		}
 	}
-	//check for diagonal win
-	if (arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2])
+
+	//checking diagonals
+	if (board[0][0] == board[1][1] && board[1][1] == board[2][2])
 	{
-		result = arr[0][0];
+		if (board[0][0] == 'X')
+			return 1;
+		else if (board[0][0] == 'O')
+			return 2;
 	}
-	if (arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0])
+
+	if (board[0][2] == board[1][1] && board[1][1] == board[2][0])
 	{
-		result = arr[0][2];
+		if (board[0][2] == 'X')
+			return 1;
+		else if (board[0][2] == 'O')
+			return 2;
 	}
-	//check for draw
-	if (result == 0)
+
+	//checking for draw
+	for (int i = 0; i < 3; i++)
 	{
-		for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
 		{
-			for (int j = 0; j < 3; j++)
-			{
-				if (arr[i][j] == 0)
-				{
-					result = -1;
-				}
-			}
+			if (board[i][j] == '_')
+				return 0;
 		}
 	}
-	//print result
-	cout<<result<<endl;
+
+	return -1;
 }
 
 int main(int argc, char const *argv[])
