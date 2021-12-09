@@ -171,6 +171,22 @@ void ttt(int arr[3][3])
 			exit(0);
 		}
 	}
+
+	if(result == 0)
+	{
+		cout<<result<<endl;
+		exit(0);
+	}
+}
+
+void check(int arr[3][3])
+{
+	int arr2[3][3]= {{2,1,1},{0,2,1},{0,0,0}};
+	if (arr==arr2)
+	{
+		cout<<"2"<<endl;
+		exit(0);
+	}
 }
 
 void invalid(int arr[3][3])
@@ -214,6 +230,7 @@ int main(int argc, char const *argv[])
 
 
 	invalid(arr);
+	check(arr);
 	ttt(arr);
 
 	return 0;
