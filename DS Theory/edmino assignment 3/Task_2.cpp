@@ -94,30 +94,51 @@ public:
 			}
 		}
 	}
-	void print_level_order()
+	//get highest value in the level
+	int getMax(Node* root)
 	{
 		if (root == NULL)
 		{
-			cout << "Tree is empty" << endl;
+			return INT_MIN;
 		}
 		else
 		{
-			queue<Node*> q;
-			q.push(root);
-			while (!q.empty())
+			int max = root->data;
+			int leftMax = getMax(root->left);
+			int rightMax = getMax(root->right);
+			if (leftMax > max)
 			{
-				Node* temp = q.front();
-				q.pop();
-				cout << temp->data << " ";
-				if (temp->left != NULL)
-				{
-					q.push(temp->left);
-				}
-				if (temp->right != NULL)
-				{
-					q.push(temp->right);
-				}
+				max = leftMax;
 			}
+			if (rightMax > max)
+			{
+				max = rightMax;
+			}
+			return max;
+		}
+	}
+
+	//get lowest value in the level
+	int getMin(Node* root)
+	{
+		if (root == NULL)
+		{
+			return INT_MAX;
+		}
+		else
+		{
+			int min = root->data;
+			int leftMin = getMin(root->left);
+			int rightMin = getMin(root->right);
+			if (leftMin < min)
+			{
+				min = leftMin;
+			}
+			if (rightMin < min)
+			{
+				min = rightMin;
+			}
+			return min;
 		}
 	}
 };
@@ -138,8 +159,5 @@ int main()
 		bst.insert(arr[i]);
 	}
 
-	bst.levelOrder();
-	cout << endl;
-	bst.print_level_order();
 	return 0;
 }
