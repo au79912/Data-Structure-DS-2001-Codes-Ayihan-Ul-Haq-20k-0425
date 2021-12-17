@@ -95,28 +95,68 @@ class BST
 			}
 		}
 
-		//print highest and lowest value in every level
-		void print_level_wise_max_min()
+		//return highest value in the level
+		int max_level(node *root)
 		{
 			node *temp = root;
 			queue<node*> q;
 			q.push(temp);
-			int max = INT_MIN;
-			int min = INT_MAX;
+			int max = 0;
 			while(!q.empty())
 			{
+				temp = q.front();
 				q.pop();
 				if(temp->data > max)
 					max = temp->data;
+				if(temp->left != NULL)
+					q.push(temp->left);
+				if(temp->right != NULL)
+					q.push(temp->right);
+			}
+			return max;
+		}
+		
+		//return lowest value in the level
+		int min_level(node *root)
+		{
+			node *temp = root;
+			queue<node*> q;
+			q.push(temp);
+			int min = 0;
+			while(!q.empty())
+			{
+				temp = q.front();
+				q.pop();
 				if(temp->data < min)
 					min = temp->data;
 				if(temp->left != NULL)
 					q.push(temp->left);
 				if(temp->right != NULL)
 					q.push(temp->right);
-				
+			}
+			return min;
+		}
+
+		//call min_level() and max_level() for each level
+		void level_print_min_max()
+		{
+			node *temp = root;
+			queue<node*> q;
+			q.push(temp);
+			while(!q.empty())
+			{
+				temp = q.front();
+				q.pop();
+				cout<<min_level(temp)<<" "<<max_level(temp)<<" ";
+				if(temp->left != NULL)
+					q.push(temp->left);
+				if(temp->right != NULL)
+					q.push(temp->right);
 			}
 		}
+
+		//honestly I don't know what this is for
+		
 };
 
 int main(int argc, char const *argv[])
@@ -134,6 +174,6 @@ int main(int argc, char const *argv[])
 
 	// bst.level_print();
 	cout<<"\n";
-	bst.print_level_wise_max_min();
+	bst.level_print_min_max();
 	return 0;
 }
