@@ -1,206 +1,149 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int result = 0;
-int arrog[3][3];
-
-void ttt(int arr[3][3])
+//node class for a bst
+class node
 {
-	if(result == -1)
-	{
-		cout<<result<<endl;
-		exit(0);
-	}
-	
-	for(int i=0;i<3;i++)
-	{
-		for(int j=0;j<3;j++)
+	public:
+		int data;
+		node *left;
+		node *right;
+		node(int d)
 		{
-			if(arr[i][j] == 0)
+			data = d;
+			left = NULL;
+			right = NULL;
+		}
+};
+
+//bst class
+class bst
+{
+	public:
+		node *root;
+		bst()
+		{
+			root = NULL;
+		}
+		void insert(int d)
+		{
+			node *temp = new node(d);
+			if(root == NULL)
 			{
-				arr[i][j] = 1;
-			}
-		}
-	}
-
-	for(int i=0;i<3;i++)
-	{
-		if(arr[i][0] == 1 && arr[i][1] == 1 && arr[i][2] == 1)
-		{
-			result = 1;
-		}
-		if(arr[0][i] == 1 && arr[1][i] == 1 && arr[2][i] == 1)
-		{
-			result = 1;
-		}
-	}
-	//check if there are 3 2s in a row vertically
-	if(arr[0][0] == 1 && arr[1][1] == 1 && arr[2][2] ==1)
-	{
-		result = 1;
-	}
-	if(arr[0][2] == 1 && arr[1][1] == 1 && arr[2][0] == 1)
-	{
-		result = 2;
-	}
-
-	//check if there are 3 2s in a row diagonally
-	if(arr[0][0] == 1 && arr[1][1] == 1 && arr[2][2] == 1)
-	{
-		result = 1;
-	}
-	if(arr[0][2] == 1 && arr[1][1] == 1 && arr[2][0] == 1)
-	{
-		result = 1;
-	}
-
-	for (int i =0 ;i<3;i++)
-	{
-		for(int j=0;j<3;j++)
-		{
-			arr[i][j]=arrog[i][j];
-		}
-	}
-
-	//for 2s
-	for(int i=0;i<3;i++)
-	{
-		for(int j=0;j<3;j++)
-		{
-			if(arr[i][j] == 0)
-			{
-				arr[i][j] = 2;
-			}
-		}
-	}
-
-	//check if there are 3 2s in a row horizontally
-	for(int i=0;i<3;i++)
-	{
-		if(arr[i][0] == 2 && arr[i][1] == 2 && arr[i][2] == 2)
-		{
-			if(result == 1)
-			{
-				result = 0;
+				root = temp;
 			}
 			else
 			{
-				result = 2;
+				node *curr = root;
+				node *prev = NULL;
+				while(curr != NULL)
+				{
+					prev = curr;
+					if(d < curr->data)
+					{
+						curr = curr->left;
+					}
+					else
+					{
+						curr = curr->right;
+					}
+				}
+				if(d < prev->data)
+				{
+					prev->left = temp;
+				}
+				else
+				{
+					prev->right = temp;
+				}
 			}
 		}
-		if(arr[0][i] == 2 && arr[1][i] == 2 && arr[2][i] == 2)
+
+		//return height of tree
+		int height(node *curr)
 		{
-			if(result == 1)
+			if(curr == NULL)
 			{
-				result = 0;
+				return 0;
 			}
 			else
 			{
-				result = 2;
+				int l = height(curr->left);
+				int r = height(curr->right);
+				if(l > r)
+				{
+					return l+1;
+				}
+				else
+				{
+					return r+1;
+				}
 			}
 		}
-	}
-	//check if there are 3 2s in a row vertically
-	if(arr[0][0] == 2 && arr[1][1] == 2 && arr[2][2] == 2)
-	{
-		if(result == 1)
-		{
-			result = 0;
-		}
-		else
-		{
-			result = 2;
-		}
-	}
-	if(arr[0][2] == 2 && arr[1][1] == 2 && arr[2][0] == 2)
-	{
-		if(result == 1)
-		{
-			result = 0;
-		}
-		else
-		{
-			result = 2;
-		}
-	}
 
-	//check if there are 3 2s in a row diagonally
-	if(arr[0][0] == 2 && arr[1][1] == 2 && arr[2][2] == 2)
-	{
-		if(result == 1)
-		{
-			result = 0;
-		}
-		else
-		{
-			result = 2;
-		}
-	}
-	if(arr[0][2] == 2 && arr[1][1] == 2 && arr[2][0] == 2)
-	{
-		if(result == 1)
-		{
-			result = 0;
-		}
-		else
-		{
-			result = 2;
-		}
-	}
-}
-
-void invalid(int arr[3][3])
-{
-	int n = 0;
-	int k=0;
-
-	for(int i = 0; i < 3; i++)
-	{
-		for(int j = 0; j < 3; j++)
-		{
-			if(arr[i][j] == 1)
+		void printPerLevelMinimum(node* root,vector<int>& res, int level) 
+		{ 
+			if (root != NULL) 
 			{
-				n++;
-			}
-			if(arr[i][j] == 2)
-			{
-				k++;
+		
+				printPerLevelMinimum(root->left,res, level + 1); 
+		
+				if (root->data < res[level]) 
+					res[level] = root->data; 
+		
+				printPerLevelMinimum(root->right,res, level + 1);
 			}
 		}
-	}
 
-	if(n != k)
-	{
-		result = -1;
-	}
-}
+		void per_level_max(node* root,vector<int>& res, int level) 
+		{ 
+			if (root != NULL) 
+			{
+		
+				per_level_max(root->left,res, level + 1); 
+		
+				if (root->data > res[level]) 
+					res[level] = root->data; 
+		
+				per_level_max(root->right,res, level + 1);
+			}
+		}
+
+		void utility_func(node* root) 
+		{
+			int n = height(root), i; 
+
+			vector<int> res(n, INT_MAX); 
+			vector<int> res1(n, INT_MIN);
+		
+			printPerLevelMinimum(root, res, 0);
+			per_level_max(root, res1, 0);
+
+			for (i = 0; i < n; i++)
+			{
+				cout << "level " << i <<" min is = "<< res[i] << " "<<endl; 
+				cout << "level " << i <<" max is = "<< res1[i] << " "<<endl;
+			} 
+		}
+};
 
 int main(int argc, char const *argv[])
 {
-	int arr[3][3];
+	bst b;
 
-	for(int i=0; i<3;i++)
+	int data;
+	int count;
+	cin>>count;
+
+	for(int i=0;i<count;i++)
 	{
-		for(int j=0;j<3;j++)
-		{
-			cin>>arr[i][j];
-		}
+		cin>>data;
+		b.insert(data);
 	}
 
-	for(int i = 0; i<3;i++)
-	{
-		for(int j=0;j<3;j++)
-		{
-			arrog[i][j]=arr[i][j];
-		}
-	}
-
-	invalid(arr);
-	// check(arr);
-	ttt(arr);
-
-	cout<<result<<endl;
+	b.utility_func(b.root);
 
 	return 0;
 }

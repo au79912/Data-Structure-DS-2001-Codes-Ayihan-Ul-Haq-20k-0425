@@ -1,179 +1,152 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 
 using namespace std;
 
+#define INT_MAX 2147483647
+#define INT_MIN -2147483648
+//node class for a bst
 class node
 {
 	public:
+		int data;
 		node *left;
 		node *right;
-		int data;
-
-		node(int data)
+		node(int d)
 		{
-			this->data = data;
+			data = d;
 			left = NULL;
 			right = NULL;
-		}
-
-		node()
-		{
-			left = NULL;
-			right = NULL;
-			// data = NULL;
 		}
 };
 
-class BST
+//bst class
+class bst
 {
 	public:
 		node *root;
-		node *current;
-		node *parent;
-
-		BST()
+		bst()
 		{
 			root = NULL;
-			current = NULL;
-			parent = NULL;
 		}
-
-		void insert(int data)
+		void insert(int d)
 		{
-			node *newNode = new node(data);
+			node *temp = new node(d);
 			if(root == NULL)
 			{
-				root = newNode;
-				current = root;
-				return;
+				root = temp;
 			}
 			else
 			{
-				current = root;
-				while(current != NULL)
+				node *curr = root;
+				node *prev = NULL;
+				while(curr != NULL)
 				{
-					parent = current;
-					if(data < current->data)
+					prev = curr;
+					if(d < curr->data)
 					{
-						current = current->left;
-						if(current == NULL)
-						{
-							parent->left = newNode;
-							return;
-						}
+						curr = curr->left;
 					}
 					else
 					{
-						current = current->right;
-						if(current == NULL)
-						{
-							parent->right = newNode;
-							return;
-						}
+						curr = curr->right;
 					}
+				}
+				if(d < prev->data)
+				{
+					prev->left = temp;
+				}
+				else
+				{
+					prev->right = temp;
 				}
 			}
 		}
 
-		//level wise print
-		void level_print()
+		//return height of tree
+		int height(node *curr)
 		{
-			node *temp = root;
-			queue<node*> q;
-			q.push(temp);
-			while(!q.empty())
+			if(curr == NULL)
 			{
-				temp = q.front();
-				q.pop();
-				cout<<temp->data<<" ";
-				if(temp->left != NULL)
-					q.push(temp->left);
-				if(temp->right != NULL)
-					q.push(temp->right);
+				return 0;
+			}
+			else
+			{
+				int l = height(curr->left);
+				int r = height(curr->right);
+				if(l > r)
+				{
+					return l+1;
+				}
+				else
+				{
+					return r+1;
+				}
 			}
 		}
 
-		//return highest value in the level
-		int max_level(node *root)
-		{
-			node *temp = root;
-			queue<node*> q;
-			q.push(temp);
-			int max = 0;
-			while(!q.empty())
+		void per_level_min(node* curr,vector<int>& vec, int lvl) 
+		{ 
+			if (curr != NULL) 
 			{
-				temp = q.front();
-				q.pop();
-				if(temp->data > max)
-					max = temp->data;
-				if(temp->left != NULL)
-					q.push(temp->left);
-				if(temp->right != NULL)
-					q.push(temp->right);
-			}
-			return max;
-		}
+				per_level_min(curr->left,vec, lvl + 1); 
 		
-		//return lowest value in the level
-		int min_level(node *root)
-		{
-			node *temp = root;
-			queue<node*> q;
-			q.push(temp);
-			int min = 0;
-			while(!q.empty())
-			{
-				temp = q.front();
-				q.pop();
-				if(temp->data < min)
-					min = temp->data;
-				if(temp->left != NULL)
-					q.push(temp->left);
-				if(temp->right != NULL)
-					q.push(temp->right);
-			}
-			return min;
-		}
-
-		//call min_level() and max_level() for each level
-		void level_print_min_max()
-		{
-			node *temp = root;
-			queue<node*> q;
-			q.push(temp);
-			while(!q.empty())
-			{
-				temp = q.front();
-				q.pop();
-				cout<<min_level(temp)<<" "<<max_level(temp)<<" ";
-				if(temp->left != NULL)
-					q.push(temp->left);
-				if(temp->right != NULL)
-					q.push(temp->right);
-			}
-		}
-
-		//honestly I don't know what this is for
+				if (curr->data < vec[lvl]) 
+					vec[lvl] = curr->data; 
 		
+				per_level_min(curr->right,vec, lvl + 1);
+			}
+		}
+
+		void per_level_max(node* curr,vector<int>& vec, int lvl) 
+		{ 
+			if (curr != NULL) 
+			{
+		
+				per_level_max(curr->left,vec, lvl + 1); 
+		
+				if (curr->data > vec[lvl]) 
+					vec[lvl] = curr->data; 
+		
+				per_level_max(curr->right,vec, lvl + 1);
+			}
+		}
+
+		void utility_func(node* root) 
+		{
+			int n = height(root);
+			int i; 
+
+			vector<int> res(n, INT_MAX); 
+			vector<int> res1(n, INT_MIN);
+		
+			per_level_min(root, res, 0);
+			per_level_max(root, res1, 0);
+
+			for (i = 0; i < n; i++)
+			{
+				cout << res[i]<<" ";
+				cout << res1[i];
+				cout<<endl;
+			} 
+		}
 };
 
 int main(int argc, char const *argv[])
 {
-	BST bst;
-	int n;
-	int data;
+	bst b;
 
-	cin>>n;
-	for(int i = 0; i<n ; i++)
+	int data;
+	int count;
+	cin>>count;
+
+	for(int i=0;i<count;i++)
 	{
 		cin>>data;
-		bst.insert(data);
+		b.insert(data);
 	}
 
-	// bst.level_print();
-	cout<<"\n";
-	bst.level_print_min_max();
+	b.utility_func(b.root);
+
 	return 0;
 }
