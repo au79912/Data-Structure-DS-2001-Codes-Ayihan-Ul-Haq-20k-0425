@@ -7,7 +7,6 @@ int arrog[3][3];
 
 void checker(int arr[3][3])
 {
-	// check if there are two 1s in a row followed by a 0 horizontally
 	for (int i = 0; i < 3; i++)
 	{
 		if (arr[i][0] == 1 && arr[i][1] == 1 && arr[i][2] == 0)
@@ -24,7 +23,6 @@ void checker(int arr[3][3])
 		}
 	}
 
-	// check if there are two 1s in a row followed by a 0 vertically
 	for (int i = 0; i < 3; i++)
 	{
 		if (arr[0][i] == 1 && arr[1][i] == 1 && arr[2][i] == 0)
@@ -48,21 +46,18 @@ void checker(int arr[3][3])
 		{
 			if (i == j)
 			{
-				// check if there are two 1s in a row followed by a 0 diagonally
 				if (arr[i][j] == 1 && arr[i + 1][j + 1] == 1 && arr[i + 2][j + 2] == 0)
 				{
 					result = 1;
 				}
-				// check if there are two 1s in a row followed by a 0 diagonally from the other side
 				if (arr[i][j] == 1 && arr[1][1] == 1 && arr[2][0] == 0)
 				{
-					result = 1;
+					result = 0;
 				}
 			}
 		}
 	}
 
-	// check if there are two 2s in a row followed by a 0 horizontally
 	for (int i = 0; i < 3; i++)
 	{
 		if (arr[i][0] == 2 && arr[i][1] == 2 && arr[i][2] == 0)
@@ -97,7 +92,6 @@ void checker(int arr[3][3])
 		}
 	}
 
-	// check if there are two 2s in a row followed by a 0 vertically
 	for (int i = 0; i < 3; i++)
 	{
 		if (arr[0][i] == 2 && arr[1][i] == 2 && arr[2][i] == 0)
@@ -138,7 +132,6 @@ void checker(int arr[3][3])
 		{
 			if (i == j)
 			{
-				// check if there are two 1s in a row followed by a 0 diagonally
 				if (arr[i][j] == 2 && arr[i + 1][j + 1] == 2 && arr[i + 2][j + 2] == 0)
 				{
 					if (result == 1)
@@ -152,7 +145,6 @@ void checker(int arr[3][3])
 						return;
 					}
 				}
-				// check if there are two 1s in a row followed by a 0 diagonally from the other side
 				if (arr[i][j] == 2 && arr[1][1] == 2 && arr[2][0] == 0)
 				{
 					if (result == 1)
@@ -191,14 +183,13 @@ void invalid(int arr[3][3])
 		}
 	}
 
-	if (a != b)
+	if (a != b + 1 && a + 1 != b)
 	{
+		if(a==b)
+		{
+			return;
+		}
 		cout << "-1";
-		exit(0);
-	}
-	if(a==4&&b==3)
-	{
-		cout<<"0";
 		exit(0);
 	}
 }
@@ -229,6 +220,6 @@ int main(int argc, char const *argv[])
 	checker(arr);
 
 	cout << result << endl;
-	
+
 	return 0;
 }
