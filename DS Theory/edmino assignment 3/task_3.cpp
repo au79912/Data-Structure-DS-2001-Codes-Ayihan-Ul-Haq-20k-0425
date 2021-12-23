@@ -117,16 +117,16 @@ public:
 		int n = height(root);
 		int i;
 
-		vector<int> res(n, INT_MAX);
-		vector<int> res1(n, INT_MIN);
+		vector<int> vect1(n, INT_MAX);
+		vector<int> vect2(n, INT_MIN);
 
-		per_level_min(root, res, 0);
-		per_level_max(root, res1, 0);
+		per_level_min(root, vect1, 0);
+		per_level_max(root, vect2, 0);
 
 		for (i = 0; i < n; i++)
 		{
-			cout << res[i] << " ";
-			cout << res1[i];
+			cout << vect1[i] << " ";
+			cout << vect2[i];
 			cout << endl;
 		}
 	}
