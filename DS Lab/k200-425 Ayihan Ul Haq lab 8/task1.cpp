@@ -89,11 +89,12 @@ bool isBST(node *root, int min, int max)
 int main()
 {
 	BST bst;
-
-	if (isBST(bst.root, -1000, 1000)==true)
-		cout << "10 points" << endl;
-	else
-		cout << "0 points" << endl;
-
+	int arr[5];
+	for(int i=0;i<5;i++)
+	{
+		cin>>arr[i];
+		bst.insert(arr[i]);
+	}
+	
 	return 0;
 }

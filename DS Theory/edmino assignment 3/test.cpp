@@ -149,6 +149,12 @@ public:
 			root = balance_tree(root);
 		}
 	}
+
+	//print tree inorder
+	void print_tree_inorder()
+	{
+		print_tree(root);
+	}
 };
 
 //
@@ -157,6 +163,7 @@ public:
 int main()
 {
 	int n;
+	avl tree;
 	cin>>n;
 	for(int i=0;i<n;i++)
 	{
@@ -165,4 +172,8 @@ int main()
 		avl tree;
 		tree.insert(d);
 	}
+
+	tree.print_tree(tree.root);
+
+	return 0;
 }
