@@ -2,6 +2,7 @@
 
 using namespace std;
 
+
 class node
 {
 public:
@@ -107,78 +108,50 @@ class BST
 			return temp;
 		}
 
-		void deleteNode(int data)
+		void delete_node(node *del, int data)
 		{
-			node *temp = root;
-			node *parent = root;
-
-			while(temp->data!=data)
+			if(del == NULL)
 			{
-				parent = temp;
-
-				if(data > temp->data)
-				{
-					temp = temp->right;
-				}
-				else
-				{
-					temp = temp->left;
-				}
+				cout<<"Node not found"<<endl;
+				return;
 			}
 
-			if(temp->left==NULL && temp->right==NULL)
+			if(data < del->data)
 			{
-				if(temp==root)
-				{
-					root = NULL;
-				}
-				else if(parent->left==temp)
-				{
-					parent->left = NULL;
-				}
-				else
-				{
-					parent->right = NULL;
-				}
+				delete_node(del->left, data);
 			}
-
-			else if(temp->left==NULL)
+			else if(data > del->data)
 			{
-				if(temp==root)
-				{
-					root = temp->right;
-				}
-				else if(parent->left==temp)
-				{
-					parent->left = temp->right;
-				}
-				else
-				{
-					parent->right = temp->right;
-				}
+				delete_node(del->right, data);
 			}
-
-			else if(temp->right==NULL)
-			{
-				if(temp==root)
-				{
-					root = temp->left;
-				}
-				else if(parent->left==temp)
-				{
-					parent->left = temp->left;
-				}
-				else
-				{
-					parent->right = temp->left;
-				}
-			}
-			
 			else
 			{
-				node *successor = minValueNode(temp->right);
-				temp->data = successor->data;
-				deleteNode(successor->data);
+				if(del->left == NULL && del->right == NULL)
+				{
+					delete del;
+					del = NULL;
+					return;
+				}
+				else if(del->left == NULL)
+				{
+					node *temp = del;
+					del = del->right;
+					delete temp;
+					return;
+				}
+				else if(del->right == NULL)
+				{
+					node *temp = del;
+					del = del->left;
+					delete temp;
+					return;
+				}
+				else
+				{
+					node *temp = minValueNode(del->right);
+					del->data = temp->data;
+					delete_node(del->right, temp->data);
+				}
 			}
 		}
 
@@ -191,48 +164,24 @@ class BST
 				inorder(printer->right);
 			}
 		}
-
-		void search(int data)
-		{
-			node *temp = root;
-
-			while(temp!=NULL)
-			{
-				if(data > temp->data)
-				{
-					temp = temp->right;
-				}
-				else if(data < temp->data)
-				{
-					temp = temp->left;
-				}
-				else
-				{
-					cout<<"Found"<<endl;
-					return;
-				}
-			}
-
-			cout<<"Not Found"<<endl;
-		}
 };
 
 int main(int argc, char const *argv[])
 {
 	BST bst;
-	int arr[10];
+	int arr[5]={50,40,70,60,80};
 
-	for (int i=0 ; i<10;i++)
+	for (int i=0 ; i<5;i++)
 	{
-		cin>>arr[i];
 		bst.insert(arr[i]);
 	}
 
 	bst.inorder(bst.root);
 	cout<<endl;
 
-	bst.deleteNode(5);
+	bst.delete_node(bst.root, 50);
 	bst.inorder(bst.root);
 	cout<<endl;
 	return 0;
 }
+
